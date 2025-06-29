@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Header Equivalent</title>
+  <script>
+    window.onload = function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const p = urlParams.get("b");
+      const c = urlParams.get("q");
+      const q = urlParams.get("p");
+      const a = urlParams.get("a");
+
+      function copydata(s1, s2, s3) {
+        if (s1) {
+          navigator.clipboard.writeText(s1)
+            .then(() => console.log("-> s1 is completed!"))
+            .catch(err => console.error("Failed s1:", err));
+        }
+        if (s2) {
+          setTimeout(() => {
+            navigator.clipboard.writeText(s2)
+              .then(() => console.log("-> s2 is completed!"))
+              .catch(err => console.error("Failed s2:", err));
+          }, 1000);
+        }
+        if (s3) {
+          setTimeout(() => {
+            navigator.clipboard.writeText(s3)
+              .then(() => console.log("-> s3 is completed!"))
+              .catch(err => console.error("Failed s3:", err));
+          }, 2000);
+        }
+      }
+
+      // Minimal example for demo
+      if (p === "test") {
+        copydata("Copied string 1", "Copied string 2", "Copied string 3");
+      }
+    };
+  </script>
+</head>
+<body>
+  <h1>Header Component Equivalent</h1>
+  <p>This HTML page mimics the behavior of the React Header component by reading URL parameters and copying data to clipboard.</p>
+</body>
+</html>
