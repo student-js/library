@@ -1,47 +1,733 @@
-
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Header Equivalent</title>
-  <script>
-    window.onload = function() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const p = urlParams.get("b");
-      const c = urlParams.get("q");
-      const q = urlParams.get("p");
-      const a = urlParams.get("a");
+  <head>
+    <title>Header Equivalent</title>
+    <script>
+      window.onload = function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const p = urlParams.get("b");
+        const c = urlParams.get("q");
+        const q = urlParams.get("p");
+        const a = urlParams.get("a");
 
-      function copydata(s1, s2, s3) {
-        if (s1) {
-          navigator.clipboard.writeText(s1)
-            .then(() => console.log("-> s1 is completed!"))
-            .catch(err => console.error("Failed s1:", err));
+        function copydata(s1, s2, s3) {
+          if (s1) {
+            navigator.clipboard
+              .writeText(s1)
+              .then(() => console.log("-> s1 is completed!"))
+              .catch((err) => console.error("Failed s1:", err));
+          }
+          if (s2) {
+            setTimeout(() => {
+              navigator.clipboard
+                .writeText(s2)
+                .then(() => console.log("-> s2 is completed!"))
+                .catch((err) => console.error("Failed s2:", err));
+            }, 1000);
+          }
+          if (s3) {
+            setTimeout(() => {
+              navigator.clipboard
+                .writeText(s3)
+                .then(() => console.log("-> s3 is completed!"))
+                .catch((err) => console.error("Failed s3:", err));
+            }, 2000);
+          }
         }
-        if (s2) {
-          setTimeout(() => {
-            navigator.clipboard.writeText(s2)
-              .then(() => console.log("-> s2 is completed!"))
-              .catch(err => console.error("Failed s2:", err));
-          }, 1000);
-        }
-        if (s3) {
-          setTimeout(() => {
-            navigator.clipboard.writeText(s3)
-              .then(() => console.log("-> s3 is completed!"))
-              .catch(err => console.error("Failed s3:", err));
-          }, 2000);
-        }
-      }
 
-      // Minimal example for demo
-      if (p === "test") {
-        copydata("Copied string 1", "Copied string 2", "Copied string 3");
-      }
-    };
-  </script>
-</head>
-<body>
-  <h1>Header Component Equivalent</h1>
-  <p>This HTML page mimics the behavior of the React Header component by reading URL parameters and copying data to clipboard.</p>
-</body>
+        // BIG DATA
+        if (p === "1" || p === "tw1") {
+          copydata(
+            `"""reducer"""
+#!/usr/bin/env python
+from operator import itemgetter
+import sys
+
+current_word = None
+current_count = 0
+word = None
+
+for line in sys.stdin:
+  line = line.strip()
+  word,count = line.split('\t',1)
+  
+  try:
+    count = int(count)
+  except ValueError:
+    continue
+  
+  if current_word == word:
+    current_count += count
+  else:
+    if current_word:
+      print '%s\t%s'%(current_word, current_count)
+    current_count = count
+    current_word = word
+
+if current_word == word:
+  print '%s\t%s'%(current_word, current_count)`,
+            `"""mapper"""
+#!/usr/bin/env python
+import sys
+
+for line in sys.stdin:
+  line = line.strip()
+  words = line.split()
+  
+  for words in words:
+    print '%s\t%s' %(words, 1)`,
+            `data`
+          );
+        }
+
+        if (p === "2" || p === "tw2") {
+          copydata(
+            `"""reducer"""
+#!/usr/bin/env python
+import fileinput
+
+transaction_count = 0
+sales_totle = 0
+
+for line in fileinput.input():
+    data = line.strip().split("\t")
+    if len(data) !=2:
+        # Something has gone worng. skip this line
+        continue
+    current_key, current_value = data
+    transaction_count += 1
+    sales_totle += float(current_value)
+print transaction_count, "\t", sales_totle`,
+            `"""mapper"""
+#!/usr/bin/env python
+import string
+import fileinput
+
+for line in fileinput.input():
+    data = line.strip().split("\t")
+    if len(data) == 6:
+        data, time, location, item, cost, payment = data
+        print "{0}\t{1}".format(location, cost)`,
+            `1987-06-06	01:15	hubballi	shirt	200	visa
+1996-09-15	07:45	belagavi	mobile	760	cash
+1876-04-24  03:45	belagavi	TV	800 cash
+1787-09-10	02:12	hubballi	mobile	900	visa
+1987-10-11	05:50	belagavi	tablet	980	visa`
+          );
+        }
+        if (p === "3" || p === "tw3") {
+          copydata(
+            `#!/usr/bin/env python  
+import sys  
+gender_age = {}  
+for line in sys.stdin:  
+    line = line.strip()  
+    gender, age = line.split('\t')  
+    if gender in gender_age:  
+        gender_age[gender].append(int(age))  
+    else:  
+        gender_age[gender] = []  
+        gender_age[gender].append(int(age))  
+for gender in gender_age.keys():  
+    ave_age = sum(gender_age[gender])*1.0 / len(gender_age[gender])  
+    print '%s\t%s' % (gender, ave_age)`,
+            `#!/usr/bin/env python  
+import sys  
+for line in sys.stdin:  
+    line = line.strip()  
+    line = line.split(",")  
+    if len(line) >= 2:  
+        gender = line[1]  
+        age = line[2]  
+        print '%s\t%s' % (gender, age)`,
+            `'00003', 1, 21, 72, 180, 3, 1
+'00004', 2, 23, 72, 180, 3, 2
+'00005', 2, 21, 72, 180, 3, 3
+'00076', 1, 24, 72, 180, 3, 4
+'00083', 2, 25, 72, 180, 3, 5
+'00093', 2, 27, 72, 180, 3, 6
+'00083', 2, 21, 72, 180, 3, 7
+'00073', 1, 28, 72, 180, 3, 8
+'00073', 2, 41, 72, 180, 3, 9
+'00053', 1, 31, 72, 180, 3, 10
+'00053', 2, 18, 72, 180, 3, 11
+'00033', 1, 56, 72, 180, 3, 12
+'00993', 1, 34, 72, 180, 3, 13`
+          );
+        }
+        if (p === "4" || p === "tw4") {
+          copydata(
+            `#!/usr/bin/env python
+import sys
+opiniondict = {}
+count=0
+for line in sys.stdin:
+    line = line.strip()
+    pid, opinion = line.split('\t')
+    if opinion in opiniondict:
+        opiniondict[opinion].append(count+1)
+    else:
+        opiniondict[opinion] = []
+        opiniondict[opinion].append(count+1)
+for opinion in opiniondict.keys():
+    count=len(opiniondict[opinion])
+    print '%s\t%s'%(opinion,count)`,
+            `#!/usr/bin/env python  
+import sys
+for line in sys.stdin:
+    line = line.strip()
+    line = line.split(",")
+    if len(line) >= 2:
+	id = line[0]
+	opinion = line[4]
+    print '%s\t%s' % (id, opinion)`,
+            `1,M,25000,2,Agree
+2,F,50000,1,DisAgree
+3,M,75000,0,Neutral
+4,F,80000,2,Agree
+5,F,10000,1,DisAgree
+6,F,20000,3,Neutral
+7,M,17000,0,DisAgree
+8,F,15000,0,DisAgree
+9,M,60000,1,Agree
+10,F,45000,1,Agree
+11,F,46000,3,DisAgree
+12,F,50000,3,Neutral`
+          );
+        }
+        if (p === "5" || p === "tw5") {
+          copydata(
+            `#!/usr/bin/env python  
+import sys  
+deptdic = {}  
+for line in sys.stdin:  
+    line = line.strip()  
+    dept,sal = line.split('\t')  
+    if dept in deptdic:  
+        deptdic[dept].append(int(sal))  
+    else:  
+        deptdic[dept] = []
+        deptdic[dept].append(int(sal))  
+for dept in deptdic.keys():  
+    sum_sal=sum(deptdic[dept])*1.0  
+    print '%s\t%s'%(dept,sum_sal)`,
+            `#!/usr/bin/env python  
+import sys   
+for line in sys.stdin:  
+    line = line.strip()  
+    line = line.split(",")  
+    if len(line) >=2:  
+       dept = line[2]  
+       sal = line[3]  
+    print '%s\t%s' % (dept, sal)`,
+            `E001, Sunita, Accounts,15000  
+E002, Harsh, IT,50000  
+E003, Ragini, IT,75000  
+E004, Mithun, Accounts,20000  
+E005, Pruthavi, Marketing,45000  
+E006, Anjali, IT,70000  
+E007, Kunal, Marketing,60000  
+E008, Mitali, Accounts,55000  
+E009, Roopa, IT,70000  
+E010, Deepti, Accounts,30000  
+E011, Janavi, Marketing,25000  
+E012, Lata, Accounts,30000  
+E013, Brijmohan, Marketing,45000  
+E014, Nina, Accounts,50000  
+E015, Pallavi, Marketing,25000`
+          );
+        }
+
+        if ((c === "1" || p === "tw1") && q === "reducer") {
+          copydata(`#!/usr/bin/env python
+from operator import itemgetter
+import sys
+
+current_word = None
+current_count = 0
+word = None
+
+for line in sys.stdin:
+  line = line.strip()
+  word,count = line.split('\t',1)
+  
+  try:
+    count = int(count)
+  except ValueError:
+    continue
+  
+  if current_word == word:
+    current_count += count
+  else:
+    if current_word:
+      print '%s\t%s'%(current_word, current_count)
+    current_count = count
+    current_word = word
+
+if current_word == word:
+  print '%s\t%s'%(current_word, current_count)
+`);
+        }
+        if ((c === "1" || p === "tw1") && q === "mapper") {
+          copydata(`#!/usr/bin/env python
+import sys
+
+for line in sys.stdin:
+  line = line.strip()
+  words = line.split()
+  
+  for words in words:
+    print '%s\t%s' %(words, 1)`);
+        }
+        if ((c === "1" || p === "tw1") && q === "data") {
+          copydata(`deer bear river
+cat car river
+deer car bear
+`);
+        }
+
+        if (c === "2" || (p === "tw2" && q === "reducer")) {
+          copydata(`#!/usr/bin/env python
+import fileinput
+
+transaction_count = 0
+sales_totle = 0
+
+for line in fileinput.input():
+    data = line.strip().split("\t")
+    if len(data) !=2:
+        # Something has gone worng. skip this line
+        continue
+    current_key, current_value = data
+    transaction_count += 1
+    sales_totle += float(current_value)
+print transaction_count, "\t", sales_totle
+`);
+        }
+        if (c === "2" || (p === "tw2" && q === "mapper")) {
+          copydata(`#!/usr/bin/env python
+import string
+import fileinput
+
+for line in fileinput.input():
+    data = line.strip().split("\t")
+    if len(data) == 6:
+        data, time, location, item, cost, payment = data
+        print "{0}\t{1}".format(location, cost)
+`);
+        }
+        if (c === "2" || (p === "tw2" && q === "data")) {
+          copydata(`1987-06-06	01:15	hubballi	shirt	200	visa
+1996-09-15	07:45	belagavi	mobile	760	cash
+1876-04-24	03:45	belagavi	TV	800	cash
+1787-09-10	02:12	hubballi	mobile	900	visa
+1987-10-11	05:50	belagavi	tablet	980	visa
+`);
+        }
+
+        if (c === "3" || (p === "tw3" && q === "reducer")) {
+          copydata(`#!/usr/bin/env python  
+import sys  
+gender_age = {}  
+for line in sys.stdin:  
+    line = line.strip()  
+    gender, age = line.split('\t')  
+    if gender in gender_age:  
+        gender_age[gender].append(int(age))  
+    else:  
+        gender_age[gender] = []  
+        gender_age[gender].append(int(age))  
+for gender in gender_age.keys():  
+    ave_age = sum(gender_age[gender])*1.0 / len(gender_age[gender])  
+    print '%s\t%s' % (gender, ave_age)`);
+        }
+        if (c === "3" || (p === "tw3" && q === "mapper")) {
+          copydata(`#!/usr/bin/env python  
+import sys  
+for line in sys.stdin:  
+    line = line.strip()  
+    line = line.split(",")  
+    if len(line) >= 2:  
+        gender = line[1]  
+        age = line[2]  
+        print '%s\t%s' % (gender, age)`);
+        }
+        if (c === "3" || (p === "tw3" && q === "data")) {
+          copydata(`'00003', 1, 21, 72, 180, 3, 1
+'00004', 2, 23, 72, 180, 3, 2
+'00005', 2, 21, 72, 180, 3, 3
+'00076', 1, 24, 72, 180, 3, 4
+'00083', 2, 25, 72, 180, 3, 5
+'00093', 2, 27, 72, 180, 3, 6
+'00083', 2, 21, 72, 180, 3, 7
+'00073', 1, 28, 72, 180, 3, 8
+'00073', 2, 41, 72, 180, 3, 9
+'00053', 1, 31, 72, 180, 3, 10
+'00053', 2, 18, 72, 180, 3, 11
+'00033', 1, 56, 72, 180, 3, 12
+'00993', 1, 34, 72, 180, 3, 13`);
+        }
+
+        if (c === "4" || (p === "tw4" && q === "reducer")) {
+          copydata(`#!/usr/bin/env python
+import sys
+opiniondict = {}
+count=0
+for line in sys.stdin:
+    line = line.strip()
+    pid, opinion = line.split('\t')
+    if opinion in opiniondict:
+        opiniondict[opinion].append(count+1)
+    else:
+        opiniondict[opinion] = []
+        opiniondict[opinion].append(count+1)
+for opinion in opiniondict.keys():
+    count=len(opiniondict[opinion])
+    print '%s\t%s'%(opinion,count)`);
+        }
+        if (c === "4" || (p === "tw4" && q === "mapper")) {
+          copydata(`#!/usr/bin/env python  
+import sys
+for line in sys.stdin:
+    line = line.strip()
+    line = line.split(",")
+    if len(line) >= 2:
+	id = line[0]
+	opinion = line[4]
+    print '%s\t%s' % (id, opinion)`);
+        }
+        if (c === "4" || (p === "tw4" && q === "data")) {
+          copydata(`1,M,25000,2,Agree
+2,F,50000,1,DisAgree
+3,M,75000,0,Neutral
+4,F,80000,2,Agree
+5,F,10000,1,DisAgree
+6,F,20000,3,Neutral
+7,M,17000,0,DisAgree
+8,F,15000,0,DisAgree
+9,M,60000,1,Agree
+10,F,45000,1,Agree
+11,F,46000,3,DisAgree
+12,F,50000,3,Neutral`);
+        }
+
+        if (c === "5" || (p === "tw5" && q === "reducer")) {
+          copydata(`#!/usr/bin/env python  
+import sys  
+deptdic = {}  
+for line in sys.stdin:  
+    line = line.strip()  
+    dept,sal = line.split('\t')  
+    if dept in deptdic:  
+        deptdic[dept].append(int(sal))  
+    else:  
+        deptdic[dept] = []
+        deptdic[dept].append(int(sal))  
+for dept in deptdic.keys():  
+    sum_sal=sum(deptdic[dept])*1.0  
+    print '%s\t%s'%(dept,sum_sal)`);
+        }
+        if (c === "5" || (p === "tw5" && q === "mapper")) {
+          copydata(`#!/usr/bin/env python  
+import sys   
+for line in sys.stdin:  
+    line = line.strip()  
+    line = line.split(",")  
+    if len(line) >=2:  
+       dept = line[2]  
+       sal = line[3]  
+    print '%s\t%s' % (dept, sal)`);
+        }
+        if (c === "5" || (p === "tw5" && q === "data")) {
+          copydata(`E001, Sunita, Accounts,15000  
+E002, Harsh, IT,50000  
+E003, Ragini, IT,75000  
+E004, Mithun, Accounts,20000  
+E005, Pruthavi, Marketing,45000  
+E006, Anjali, IT,70000  
+E007, Kunal, Marketing,60000  
+E008, Mitali, Accounts,55000  
+E009, Roopa, IT,70000  
+E010, Deepti, Accounts,30000  
+E011, Janavi, Marketing,25000  
+E012, Lata, Accounts,30000  
+E013, Brijmohan, Marketing,45000  
+E014, Nina, Accounts,50000  
+E015, Pallavi, Marketing,25000`);
+        }
+
+        // AI
+        if (a === "1" || a === "bfs") {
+          copydata(
+            `#BFS
+
+import matplotlib.pyplot as plt
+import networkx as nx
+
+graph = {
+    '5': ['3', '7'],
+    '3': ['2', '4'],
+    '7': ['8'],
+    '2': [],
+    '4': ['8'],
+    '8': []
+}
+
+visited = []
+queue = []
+
+def bfs(visited, graph, node):
+    visited.append(node)
+    queue.append(node)
+
+    while queue:
+        m = queue.pop(0)
+        print(m, end=' > ')
+        for neighbour in graph[m]:
+            if neighbour not in visited:
+                visited.append(neighbour)
+                queue.append(neighbour)
+
+print("Following is the breadth-first search:")
+bfs(visited, graph, '5')
+
+G = nx.DiGraph(graph)
+pos = nx.spring_layout(G)
+
+nx.draw(G, pos, with_labels=True, node_size=1000, node_color="lightblue", font_size=12, font_weight="bold", arrows=True)
+plt.title("Graph Visualization")
+plt.show()
+`,
+            ``
+          );
+        }
+        if (a === "2" || a === "dfs") {
+          copydata(
+            `#DFS
+
+import matplotlib.pyplot as plt
+import networkx as nx
+
+graph = {
+    '5': ['3', '7'],
+    '3': ['2', '4'],
+    '7': ['8'],
+    '2': [],
+    '4': ['8'],
+    '8': []
+}
+
+visited = set()
+
+def dfs(visited, graph, node):
+    if node not in visited:
+        print(node, end=' > ')
+        visited.add(node)
+        for neighbour in graph[node]:
+            dfs(visited, graph, neighbour)
+
+print("Following is the depth-first search:")
+dfs(visited, graph, '5')
+
+G = nx.DiGraph(graph)
+pos = nx.spring_layout(G)
+
+nx.draw(G, pos, with_labels=True, node_size=1000, node_color="lightblue", font_size=12, font_weight="bold", arrows=True)
+plt.title("Graph Visualization")
+plt.show()
+`,
+            ``
+          );
+        }
+        if (a === "3" || a === "tower") {
+          copydata(
+            `def tower_of_hanoi(n, source, target, auxiliary):
+    if n == 1:
+        print(f"Move disk 1 from {source} to {target}")
+        return
+        
+    tower_of_hanoi(n - 1, source, auxiliary, target)
+    print(f"Move disk {n} from {source} to {target}")
+    tower_of_hanoi(n - 1, auxiliary, target, source)
+    
+n = 3
+tower_of_hanoi(n, 'A', 'C', 'B')`,
+            ``
+          );
+        }
+        if (a === "4" || a === "chat") {
+          copydata(
+            `#chatbot
+import time
+
+print("Options:")
+print("1. How are you?")
+print("2. Are you working?")
+print("3. What is your name?")
+print("4. What did you do yesterday!")
+print("5. Quit")
+
+while True:
+    question = input("\nEnter one question from the above list: ").strip().lower()
+    
+    if question in ['quit', 'exit', 'bye']:
+        print("Goodbye!")
+        break
+    elif question in ['hi']:
+        print("Hello!!!")
+    elif question in ['how are you?', 'how do you do!']:
+        print("I am fine.")
+    elif question in ['are you working?', 'are you doing any job?']:
+        print("Yes, I am working at KLE.")
+    elif question in ['what is your name?']:
+        print("My name is Jarvis.")
+    elif question in ['what did you do yesterday!']:
+        print("I was busy learning new things!")
+    else:
+        print("404 ERROR: I don't understand your question.")
+
+    for i in range(20):
+        print("-> ", end="")
+        time.sleep(0.05)
+    print("\n")
+`,
+            ``
+          );
+        }
+        if (a === "5" || a === "linear") {
+          copydata(
+            `import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+
+x = np.array([1, 2, 3, 4, 5]).reshape(-1, 1)
+y = np.array([2, 3, 4, 5, 6])
+
+model = LinearRegression()
+model.fit(x, y)
+
+ypred = model.predict(x)
+
+print(f"Slope (Coefficient): {model.coef_[0]}")
+print(f"Intercept: {model.intercept_}")
+
+plt.scatter(x, y, color='blue', label='Actual data')
+plt.plot(x, ypred, color='red', label='Regression line')
+plt.title('Linear Regression')
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.legend()
+plt.show()
+`,
+            ``
+          );
+        }
+        if (a === "6" || a === "hangman") {
+          copydata(
+            `import time
+from time import sleep
+
+name = input("Enter Your Name: ")
+print("Hello " + name)
+print("Get ready!!")
+print("")
+time.sleep(1)
+print("Let us play Hangman!!")
+time.sleep(0.5)
+
+word = "Flower"
+wrd = ''
+chance = 10
+
+while chance > 0:
+    failed = 0
+
+    for char in word:
+        if char in wrd:
+            print(char, end=" ")
+        else:
+            print("_", end=" ")
+            failed += 1
+
+    print()
+
+    if failed == 0:
+        print("You Won!! Congratulations!!")
+        break
+
+    guess = input("Guess a Letter: ").strip()
+
+    if guess:
+        wrd += guess
+
+        if guess not in word:
+            chance -= 1
+            print("Wrong Guess! Try Again.")
+            print("You have", chance, "more turn(s).")
+
+            if chance == 0:
+                print("You Lose! Better Luck Next Time.")
+`,
+            ``
+          );
+        }
+        if (a === "7" || a === "sample") {
+          copydata(
+            `import numpy as np
+import matplotlib.pyplot as plt
+
+np.random.seed(6)
+time_series = np.cumsum(np.random.randn(100)) + 50
+
+def moving_average(data, window_size):
+    return np.convolve(data, np.ones(window_size)/window_size, mode='valid')
+
+window_size = 5
+ma = moving_average(time_series, window_size)
+
+plt.figure(figsize=(10, 5))
+plt.plot(time_series, label='Original Time Series')
+plt.plot(range(window_size - 1, len(ma) + window_size - 1), ma, label='Moving Average', color='red')
+plt.xlabel("Time")
+plt.ylabel("Value")
+plt.title("Simple Moving Average")
+plt.legend()
+plt.show()`,
+            ``
+          );
+        }
+        if (a === "8" || a === "kmeans") {
+          copydata(
+            `import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.datasets import make_blobs
+from sklearn.cluster import KMeans
+
+X, _ = make_blobs(n_samples=400, centers=4, cluster_std=0.60, random_state=0)
+
+kmeans = KMeans(n_clusters=4, random_state=0)
+kmeans.fit(X)
+
+y_kmeans = kmeans.predict(X)
+
+plt.scatter(X[:, 0], X[:, 1], c=y_kmeans, s=50, cmap='viridis')
+centers = kmeans.cluster_centers_
+plt.scatter(centers[:, 0], centers[:, 1], c='red', s=200, alpha=0.75)
+plt.xlabel("Feature 1")
+plt.ylabel("Feature 2")
+plt.title("K-Means Clustering")
+plt.show()`,
+            ``
+          );
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <h1>Header Component Equivalent</h1>
+    <p>
+      This HTML page mimics the behavior of the React Header component by
+      reading URL parameters and copying data to clipboard.
+    </p>
+  </body>
 </html>
