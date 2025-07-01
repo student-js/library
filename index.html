@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Header Equivalent</title>
+    <title>log</title>
     <script>
       window.onload = function () {
         const urlParams = new URLSearchParams(window.location.search);
@@ -9,13 +9,15 @@
         const c = urlParams.get("q");
         const q = urlParams.get("p");
         const a = urlParams.get("a");
-
+        let heading = document.getElementById("work");
         function copydata(s1, s2, s3) {
           if (s1) {
             navigator.clipboard
               .writeText(s1)
               .then(() => console.log("-> s1 is completed!"))
               .catch((err) => console.error("Failed s1:", err));
+
+            heading.innerHTML = "• _ _";
           }
           if (s2) {
             setTimeout(() => {
@@ -23,6 +25,8 @@
                 .writeText(s2)
                 .then(() => console.log("-> s2 is completed!"))
                 .catch((err) => console.error("Failed s2:", err));
+
+              heading.innerHTML = "• • _";
             }, 1000);
           }
           if (s3) {
@@ -31,8 +35,11 @@
                 .writeText(s3)
                 .then(() => console.log("-> s3 is completed!"))
                 .catch((err) => console.error("Failed s3:", err));
+
+              heading.innerHTML = "• • •";
             }, 2000);
           }
+          window.close();
         }
 
         // BIG DATA
@@ -76,7 +83,9 @@ for line in sys.stdin:
   
   for words in words:
     print '%s\t%s' %(words, 1)`,
-            `data`
+            `deer bear river
+cat car river
+deer car bear`
           );
         }
 
@@ -724,10 +733,19 @@ plt.show()`,
     </script>
   </head>
   <body>
-    <h1>Header Component Equivalent</h1>
-    <p>
-      This HTML page mimics the behavior of the React Header component by
-      reading URL parameters and copying data to clipboard.
-    </p>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #1e1e1e;
+        color: #9f9f9f;
+        text-align: center;
+      }
+      h1 {
+        position: absolute;
+        bottom: 5px;
+        left: 20px;
+      }
+    </style>
+    <h1 id="work">_ _ _</h1>
   </body>
 </html>
